@@ -2,6 +2,10 @@
 
 Pretius Freeze Report is dynamic action plugin for freezing columns and header of classic report.
 
+## License
+
+[MIT]
+
 ## Installation
 
 Install the plugin file ######.sql
@@ -14,11 +18,7 @@ Install the plugin file ######.sql
 1. Set _Fire on Initialization_ to __YES__
 1. Lunch application
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
-[MIT]
 
 
 ## About Author
