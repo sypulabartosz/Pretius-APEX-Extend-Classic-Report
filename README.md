@@ -22,8 +22,8 @@ Install the plugin file ######.sql
 
 
 ## About Author
-Author | Website |Github | Twitter | E-mail
--------|---------|-------|---------|-------
+Author | Github | Twitter | E-mail
+-------|-------|---------|-------
 Bartosz Sypuła | [@sypulabartosz](https://github.com/sypulabartosz) | [@sypulabartosz](https://twitter.com/sypulabartosz) | bsypula@pretius.com
 
 ## About Pretius
