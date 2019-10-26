@@ -12,7 +12,7 @@ In many situations reports have got some key columns which should be visible all
 
 ## Installation
 
-Install the plugin file dynamic_action_plugin_pretius_freeze_report.sql
+Install the plugin file _dynamic_action_plugin_pretius_freeze_report.sql_
 
 ## Usage
 
