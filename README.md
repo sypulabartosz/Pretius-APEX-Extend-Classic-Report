@@ -4,14 +4,15 @@ Pretius Freeze Report is dynamic action plugin for freezing columns and header o
 
 ## Information about plugin
 
-In many situations reports have got some key columns which should be visible all the time, even if our report has got too many columns and vertical scroll appear. The best solution for this problem is to freeze these key columns to make them all the time visible. In classic report this kind of option is not available. The same happened with headers if the vertical scroll appears sometimes it is very useful to have freeze header stick to the top of browser window. For this particular cases The Pretius Freeze Report was created. 
+In many situations reports have got some key columns which should be visible all the time, even if our report has got too many columns and horizontal scroll appeared. The best solution for this problem is to freeze these key columns to make them all the time visible. In classic report this kind of option is not available. The same happens with headers if the vertical scroll appeared it is very useful to have freeze header stick to the top of browser window. For these particular cases The Pretius Freeze Report was created.
+
 ## License
 
 [MIT]
 
 ## Installation
 
-Install the plugin file ######.sql
+Install the plugin file dynamic_action_plugin_pretius_freeze_report.sql
 
 ## Usage
 
