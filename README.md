@@ -8,11 +8,15 @@ In many situations reports have got some key columns which should be visible all
 
 ## License
 
-[MIT]
+MIT
 
 ## Installation
 
 Install the plugin file _dynamic_action_plugin_pretius_freeze_report.sql_
+
+## Demo application
+
+https://apex.oracle.com/pls/apex/f?p=10516:100:103153888436256:::::
 
 ## Usage
 
