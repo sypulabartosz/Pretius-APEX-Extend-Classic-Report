@@ -1,4 +1,3 @@
-prompt --application/set_environment
 set define off verify off feedback off
 whenever sqlerror exit sql.sqlcode rollback
 --------------------------------------------------------------------------------
@@ -6,48 +5,30 @@ whenever sqlerror exit sql.sqlcode rollback
 -- ORACLE Application Express (APEX) export file
 --
 -- You should run the script connected to SQL*Plus as the Oracle user
--- APEX_190200 or as the owner (parsing schema) of the application.
+-- APEX_050100 or as the owner (parsing schema) of the application.
 --
 -- NOTE: Calls to apex_application_install override the defaults below.
 --
 --------------------------------------------------------------------------------
 begin
 wwv_flow_api.import_begin (
- p_version_yyyy_mm_dd=>'2019.10.04'
-,p_release=>'19.2.0.00.15'
-,p_default_workspace_id=>35621699701423559109
-,p_default_application_id=>10516
-,p_default_id_offset=>0
-,p_default_owner=>'FREEZEPLUGINTEST'
+ p_version_yyyy_mm_dd=>'2016.08.24'
+,p_release=>'5.1.3.00.05'
+,p_default_workspace_id=>1827663762156224
+,p_default_application_id=>1
+,p_default_owner=>'VAN_DATA'
 );
 end;
 /
- 
-prompt APPLICATION 10516 - Plugin TEST3
---
--- Application Export:
---   Application:     10516
---   Name:            Plugin TEST3
---   Date and Time:   20:55 Sunday October 27, 2019
---   Exported By:     BSYPULA@PRETIUS.COM
---   Flashback:       0
---   Export Type:     Component Export
---   Manifest
---     PLUGIN: 1062932696427218278
---   Manifest End
---   Version:         19.2.0.00.15
---   Instance ID:     63113759365424
---
-
+prompt --application/ui_types
 begin
-  -- replace components
-  wwv_flow_api.g_mode := 'REPLACE';
+null;
 end;
 /
 prompt --application/shared_components/plugins/dynamic_action/pretius_freeze_report
 begin
 wwv_flow_api.create_plugin(
- p_id=>wwv_flow_api.id(1062932696427218278)
+ p_id=>wwv_flow_api.id(169503786907603972)
 ,p_plugin_type=>'DYNAMIC ACTION'
 ,p_name=>'PRETIUS_FREEZE_REPORT'
 ,p_display_name=>'Pretius Freeze Report'
@@ -123,7 +104,7 @@ wwv_flow_api.create_plugin(
 '<strong>About author</strong>',
 '</p>',
 '<p>',
-unistr('  Author: <code>Bartosz Sypu\0142a</code><br/>'),
+'  Author: <code>Bartosz Sypuła</code><br/>',
 '  E-mail: <code>bartosz.sypula94@gmail.com</code><br/>',
 '  Twitter: <code>@sypulabartosz</code><br/>',
 '</p>',
@@ -132,11 +113,11 @@ unistr('  Author: <code>Bartosz Sypu\0142a</code><br/>'),
 '  Website: http://pretius.com',
 '</p>'))
 ,p_version_identifier=>'1.0'
-,p_files_version=>89
+,p_files_version=>84
 );
 wwv_flow_api.create_plugin_attribute(
- p_id=>wwv_flow_api.id(1063015238866838580)
-,p_plugin_id=>wwv_flow_api.id(1062932696427218278)
+ p_id=>wwv_flow_api.id(169586329347224274)
+,p_plugin_id=>wwv_flow_api.id(169503786907603972)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>1
 ,p_display_sequence=>10
@@ -151,29 +132,29 @@ wwv_flow_api.create_plugin_attribute(
 '</p>'))
 );
 wwv_flow_api.create_plugin_attr_value(
- p_id=>wwv_flow_api.id(1063015534029840594)
-,p_plugin_attribute_id=>wwv_flow_api.id(1063015238866838580)
+ p_id=>wwv_flow_api.id(169586624510226288)
+,p_plugin_attribute_id=>wwv_flow_api.id(169586329347224274)
 ,p_display_sequence=>10
 ,p_display_value=>'Freeze header and columns'
 ,p_return_value=>'freeze_both'
 );
 wwv_flow_api.create_plugin_attr_value(
- p_id=>wwv_flow_api.id(1063015937370845083)
-,p_plugin_attribute_id=>wwv_flow_api.id(1063015238866838580)
+ p_id=>wwv_flow_api.id(169587027851230777)
+,p_plugin_attribute_id=>wwv_flow_api.id(169586329347224274)
 ,p_display_sequence=>20
 ,p_display_value=>'Feeze columns'
 ,p_return_value=>'freeze_column'
 );
 wwv_flow_api.create_plugin_attr_value(
- p_id=>wwv_flow_api.id(1063016331531846346)
-,p_plugin_attribute_id=>wwv_flow_api.id(1063015238866838580)
+ p_id=>wwv_flow_api.id(169587422012232040)
+,p_plugin_attribute_id=>wwv_flow_api.id(169586329347224274)
 ,p_display_sequence=>30
 ,p_display_value=>'Freeze header'
 ,p_return_value=>'freeze_header'
 );
 wwv_flow_api.create_plugin_attribute(
- p_id=>wwv_flow_api.id(1062950338493377348)
-,p_plugin_id=>wwv_flow_api.id(1062932696427218278)
+ p_id=>wwv_flow_api.id(169521428973763042)
+,p_plugin_id=>wwv_flow_api.id(169503786907603972)
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>2
 ,p_display_sequence=>20
@@ -182,7 +163,7 @@ wwv_flow_api.create_plugin_attribute(
 ,p_is_required=>false
 ,p_default_value=>'0'
 ,p_is_translatable=>false
-,p_depending_on_attribute_id=>wwv_flow_api.id(1063015238866838580)
+,p_depending_on_attribute_id=>wwv_flow_api.id(169586329347224274)
 ,p_depending_on_has_to_exist=>true
 ,p_depending_on_condition_type=>'IN_LIST'
 ,p_depending_on_expression=>'freeze_both,freeze_column'
@@ -210,8 +191,8 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(1292075994369732289)
-,p_plugin_id=>wwv_flow_api.id(1062932696427218278)
+ p_id=>wwv_flow_api.id(171275428748280552)
+,p_plugin_id=>wwv_flow_api.id(169503786907603972)
 ,p_file_name=>'pretius.FreezeWidget.css'
 ,p_mime_type=>'text/css'
 ,p_file_charset=>'utf-8'
@@ -412,18 +393,17 @@ end;
 /
 begin
 wwv_flow_api.create_plugin_file(
- p_id=>wwv_flow_api.id(1292076222469732289)
-,p_plugin_id=>wwv_flow_api.id(1062932696427218278)
+ p_id=>wwv_flow_api.id(171297548391419875)
+,p_plugin_id=>wwv_flow_api.id(169503786907603972)
 ,p_file_name=>'pretius.FreezeWidget.js'
-,p_mime_type=>'text/javascript'
+,p_mime_type=>'application/javascript'
 ,p_file_charset=>'utf-8'
 ,p_file_content=>wwv_flow_api.varchar2_to_blob(wwv_flow_api.g_varchar2_table)
 );
 end;
 /
-prompt --application/end_environment
 begin
-wwv_flow_api.import_end(p_auto_install_sup_obj => nvl(wwv_flow_application_install.get_auto_install_sup_obj, false));
+wwv_flow_api.import_end(p_auto_install_sup_obj => nvl(wwv_flow_application_install.get_auto_install_sup_obj, false), p_is_component_import => true);
 commit;
 end;
 /
