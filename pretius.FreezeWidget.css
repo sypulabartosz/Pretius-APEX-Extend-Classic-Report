@@ -2,18 +2,19 @@
   position: relative;
   overflow: hidden;
   z-index: 3;
+  display: flex;
+}
+.tbody_div{
+  display: flex;
+}
+.freeze_div{
+  position: relative;
 }
 .thead_div > .freeze_header_div{
-  /* position: fixed; */
    position: relative; 
 }
 .thead_div > .header_div{
-   position: relative; 
-  /* position:fixed; */
-}
-.thead_div > .header_div .header_div_rel{
-  position: relative; 
- /* position:fixed; */
+   position: relative;
 }
 .thead_div > .header_div thead{
   display: table-row-group;
@@ -32,18 +33,4 @@
 .tbody_div > .freeze_div > table{
   width: 100%;
 }
-.standard_div{
-  /* display: inline-block; */
-  /* display: flex; */
-}
-.freeze_div{
-  /* display: inline-block; */
-  /* display: flex; */
-  position: relative;
-}
-.tbody_div{
-  display: flex;
-}
-.thead_div{
-  display: flex;
-}
+
