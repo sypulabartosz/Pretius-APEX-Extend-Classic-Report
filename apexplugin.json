@@ -36,7 +36,7 @@
       "plugin" : {
         "internalName" : "PRETIUS_FREEZE_REPORT",
         "type" : "dynamic action",
-        "demo" : "to_fill",
+        "demo" : "https://apex.oracle.com/pls/apex/f?p=PRETIUS_FREEZE_REPORT:100",
         "previewImage" : "to_fill"
       }
     }
