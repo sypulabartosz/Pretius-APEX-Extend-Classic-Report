@@ -9,7 +9,7 @@ In many situations reports have got some key columns which should be visible all
 ## Prewiev
 pretius_freeze_report.gif
 
-![pretius_freeze_report gif](pretius_freeze_report.gif)
+![Preview gif](pretius_freeze_report.gif)
 
 ## License
 
