@@ -28,7 +28,7 @@ prompt APPLICATION 10516 - Plugin TEST3
 -- Application Export:
 --   Application:     10516
 --   Name:            Plugin TEST3
---   Date and Time:   13:12 Saturday October 26, 2019
+--   Date and Time:   20:55 Sunday October 27, 2019
 --   Exported By:     BSYPULA@PRETIUS.COM
 --   Flashback:       0
 --   Export Type:     Component Export
@@ -147,14 +147,8 @@ wwv_flow_api.create_plugin_attribute(
 ,p_lov_type=>'STATIC'
 ,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<p>',
-'  In this section you can choose the type of freezeing the classic report.',
-'  Plugin ensures all the three types of freezeing the elements of classic report ',
-'</p>',
-'<ul>',
-'  <li><strong>Freeze header and columns</strong></li>',
-'  <li><strong>Feeze columns</strong></li>',
-'  <li><strong>Freeze header</strong></li>',
-'</ul>'))
+'  Three types of freezing the elements of classic report available',
+'</p>'))
 );
 wwv_flow_api.create_plugin_attr_value(
  p_id=>wwv_flow_api.id(1063015534029840594)
@@ -183,7 +177,7 @@ wwv_flow_api.create_plugin_attribute(
 ,p_attribute_scope=>'COMPONENT'
 ,p_attribute_sequence=>2
 ,p_display_sequence=>20
-,p_prompt=>'Number of columns to freeze'
+,p_prompt=>'Columns to freeze'
 ,p_attribute_type=>'NUMBER'
 ,p_is_required=>false
 ,p_default_value=>'0'
@@ -194,7 +188,7 @@ wwv_flow_api.create_plugin_attribute(
 ,p_depending_on_expression=>'freeze_both,freeze_column'
 ,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<p>',
-'  Choose the number of columns you want to freeze',
+'  Number of first columns entered will be frozen ',
 '</p>'))
 );
 end;
