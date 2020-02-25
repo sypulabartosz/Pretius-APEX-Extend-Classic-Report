@@ -1,0 +1,36 @@
+.thead_div{
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+  display: flex;
+}
+.tbody_div{
+  display: flex;
+}
+.freeze_div{
+  position: relative;
+}
+.thead_div > .freeze_header_div{
+   position: relative; 
+}
+.thead_div > .header_div{
+   position: relative;
+}
+.thead_div > .header_div thead{
+  display: table-row-group;
+}
+.thead_div > .freeze_header_div thead{
+  display: table-row-group;
+}
+.thead_div > .freeze_header_div > table{
+  width: 100%;
+  height: 100%;
+}
+.thead_div > .header_div > table{
+  width: 100%;
+  height: 100%;
+}
+.tbody_div > .freeze_div > table{
+  width: 100%;
+}
+
