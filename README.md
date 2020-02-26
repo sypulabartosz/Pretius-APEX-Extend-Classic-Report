@@ -1,10 +1,10 @@
-# Pretius Freeze Report
+# Pretius APEX Extend Classic Report
 
-Pretius Freeze Report is dynamic action plugin for freezing columns and header of classic report.
+Pretius APEX Extend Classic Report is dynamic action plugin for freezing columns and header of classic report in Oracle Application Express(APEX).
 
 ## Information about plugin
 
-In many situations, reports have multiple columns and users want to have a key column visible all the time even if horizontal scroll appeared. The best solution for this problem is to freeze these key columns to make them all the time visible. In classic report this kind of option is not available. The same happens with headers if the vertical scroll appeared it is very useful to have freeze header stick to the top of browser window. For these particular cases The Pretius Freeze Report was created.
+In many situations, Classic Reports have multiple columns and users want to have a key column visible all the time even if horizontal scroll appeared. The best solution for this problem is to freeze these key columns to make them all the time visible. In classic report this kind of option is not available. The same happens with headers if the vertical scroll appeared it is very useful to have freeze header stick to the top of browser window. For these particular cases The Pretius APEX Extend Classic Report was created.
 
 ## Preview
 
@@ -14,25 +14,42 @@ In many situations, reports have multiple columns and users want to have a key c
 
 MIT
 
+## Feature at glance
+* compatible with Oracle APEX 5.1, 18.x, 19.x
+* freeze column in classic report
+* freeze headers in classic report
+
+## Roadmap
+Not yet available
+
 ## Installation
 
-Install the plugin file _dynamic_action_plugin_pretius_freeze_report.sql_
+### Installation package
+*  src/dynamic_action_plugin_pretius_extend_classic_report.sql - the plugin installation file for Oracle APEX apps
+### Install procedure
+Using Oracle APEX plugin wizard install the plugin file src/dynamic_action_plugin_pretius_extend_classic_report.sql
 
 ## Demo application
 
-https://apex.oracle.com/pls/apex/f?p=PRETIUS_FREEZE_REPORT:100
+https://apex.oracle.com/pls/apex/f?p=PRETIUS_EXTEND_CLASSIC_REPORT:100
 
-## Usage
+## Usage guide
 
-1. Add unique _STATIC ID_ for classic report
 1. Create dynamic action _After Refresh_ for indicated report 
 1. Configure the plugin options
+  1. Freeze type - decide if you want freeze columns, headers or both
+  1. Columns to freeze - number of columns to freeze
 1. Set _Fire on Initialization_ to __YES__
 1. Lunch application
 
+## Changelog
 
+### 1.0.0 
+Initial Release
 
+## Known issues
 
+ 
 ## About Author
 Author | Github | Twitter | E-mail
 -------|-------|---------|-------
