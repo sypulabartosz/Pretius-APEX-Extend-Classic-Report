@@ -7,7 +7,7 @@ $.widget('pretius.freezeWidget', {
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget options', this.options);
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget element', this.element);
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget element', this.element.get(0));
-    console.log(this.element);
+
     this.options ={
       freeze_columns : this.options.plugin.action.attribute01 ? this.options.plugin.action.attribute01.indexOf('freeze_column') > -1 : false,
       freeze_header : this.options.plugin.action.attribute01 ? this.options.plugin.action.attribute01.indexOf('freeze_header') > -1 : false,
@@ -256,9 +256,6 @@ $.widget('pretius.freezeWidget', {
     $.each(this.new_raport_table_wrapper.children('table').find('th'), $.proxy(function(th_index, elem) {
       
       var outer_cell_width = $(elem).outerWidth();
-      console.log('AAAAthis');
-
-      console.log(this);
       this.new_raport_table_wrapper
         .find('.thead_div th')
         .eq(th_index)
@@ -267,7 +264,6 @@ $.widget('pretius.freezeWidget', {
             });
       if(th_index < this.options.number_of_columns_to_freeze){
         $.each(this.new_raport_table_wrapper.find(".tbody_div > .freeze_div > table tr"), $.proxy(function(tr_index, elem) {
-          console.log('BBBBthis');
           $(elem)
             .children()
             .filter(function(index){ return index == th_index;})
@@ -284,7 +280,6 @@ $.widget('pretius.freezeWidget', {
             }, this))
             .css("min-width", outer_cell_width);          
         }, this) );
-
       }      
     }, this) );
 
@@ -293,7 +288,6 @@ $.widget('pretius.freezeWidget', {
   },
   _set_cell_Heights: function(){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_cell_Heights');
-
     //setting heights of header divs
     this.report_divs.freeze_header_div.height(this.new_raport_table_wrapper.children('table').find('thead tr').outerHeight());
     this.report_divs.header_div.height(this.new_raport_table_wrapper.children('table').find('thead tr').outerHeight());
@@ -343,7 +337,6 @@ $.widget('pretius.freezeWidget', {
     }
     this.scrollElement = elem;
     elem.css('overflow-x', 'scroll');
-    //elem.width(this.new_raport.outerWidth()-this.report_divs.freeze_div.outerWidth());
   },
   _getScrollParent: function(pnode) {
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_getScrollParent');
@@ -390,7 +383,6 @@ $.widget('pretius.freezeWidget', {
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_x_header_axis');
     
       this.scrollElement.scroll($.proxy(function (event) {
-        console.log(this.scrollElement.scrollLeft());
         apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_x_header_axis scroll event',{'event':event});
         if(this.report_tdivs.thead.css("position") === "fixed"){
           this.report_divs.header_div.css("left", - this.scrollElement.scrollLeft());
@@ -426,27 +418,23 @@ $.widget('pretius.freezeWidget', {
           this.plugin_settings.scrollX_value = actualScroll;
           this.report_divs.freeze_header_div.css("left",0);
           this.report_divs.header_div.css("left", 0);
-          
           this.theadPosition = "relative";
           this.report_tdivs.thead.css("position", "relative");
           this.report_divs.freeze_header_div.css("top",0);
           this.report_divs.header_div.css("top",0);
-          
           this.report_tdivs.thead.css("top",0)
           this.report_tdivs.tbody.css('padding-top',0);
           this.report_tdivs.thead.css('width','');
-
           this.report_tdivs.thead.css({
             "border-bottom-color": "", 
             "border-bottom-width":"",
             "border-bottom-style":""
           });
-
+          //actualizing scroll
           this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value+1);
           this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value-1);
           
         }else{
-          
           this.report_tdivs.thead.css("position", "fixed");
           this.theadPosition = "fixed";   
         };
@@ -465,6 +453,7 @@ $.widget('pretius.freezeWidget', {
             "border-bottom-width":"1px",
             "border-bottom-style":"solid"
           });
+          //actualizing scroll
           this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value+1);
           this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value-1);
         }else{
