@@ -283,8 +283,8 @@ $.widget('pretius.freezeWidget', {
       }      
     }, this) );
 
-    this.report_divs.header_div.width(this.new_raport_table_wrapper.width() - this.report_divs.freeze_header_div.width());
-    this.report_divs.standard_div.width(this.new_raport_table_wrapper.width() - this.report_divs.freeze_div.width());
+    this.report_divs.header_div.width(this.new_raport.width() - this.report_divs.freeze_header_div.width());
+    this.report_divs.standard_div.width(this.new_raport.width() - this.report_divs.freeze_div.width());
   },
   _set_cell_Heights: function(){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_cell_Heights');
@@ -414,8 +414,7 @@ $.widget('pretius.freezeWidget', {
         
         if($(window).scrollTop() + header_height < header_offset_top_fixed || $(window).scrollTop() + header_height > header_offset_top_fixed + tableWrap_height - thead_height){
       
-          var actualScroll = this.scrollElement.scrollLeft();
-          this.plugin_settings.scrollX_value = actualScroll;
+
           this.report_divs.freeze_header_div.css("left",0);
           this.report_divs.header_div.css("left", 0);
           this.theadPosition = "relative";
@@ -431,18 +430,12 @@ $.widget('pretius.freezeWidget', {
             "border-bottom-style":""
           });
           //actualizing scroll
-          this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value+1);
-          this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value-1);
-          
-        }else{
-          this.report_tdivs.thead.css("position", "fixed");
-          this.theadPosition = "fixed";   
-        };
+          this.report_divs.header_div.css("left",- this.scrollElement.scrollLeft());      
+        }
       }else if(this.theadPosition === "relative"){
         
         if($(window).scrollTop() + header_height >header_offset_top_relative && $(window).scrollTop() + header_height < header_offset_top_relative + tableWrap_height - thead_height){
-          var actualScroll = this.scrollElement.scrollLeft();
-          this.plugin_settings.scrollX_value = actualScroll;
+
           this.report_tdivs.thead.css("position", "fixed");
           this.theadPosition = "fixed";
           this.report_divs.freeze_header_div.css("left", 0);
@@ -454,14 +447,9 @@ $.widget('pretius.freezeWidget', {
             "border-bottom-style":"solid"
           });
           //actualizing scroll
-          this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value+1);
-          this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value-1);
-        }else{
-          this.theadPosition = "relative";
-          this.report_tdivs.thead.css("position", "relative");
-          this.report_divs.freeze_header_div.css("top",0);
-          this.report_divs.header_div.css("top",0);     
-        }         
+          this.report_divs.header_div.css("left", - this.scrollElement.scrollLeft());
+          this.report_divs.freeze_header_div.css("left",0);
+        }      
       }
 
     },this));
