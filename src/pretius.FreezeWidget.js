@@ -6,7 +6,6 @@ $.widget('pretius.freezeWidget', {
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'initialize widget');
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget options', this.options);
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget element', this.element);
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget element', this.element.get(0));
 
     this.options ={
       freeze_columns : this.options.plugin.action.attribute01 ? this.options.plugin.action.attribute01.indexOf('freeze_column') > -1 : false,
