@@ -20,7 +20,7 @@ MIT
 * freeze headers in classic report
 
 ## Roadmap
-Not yet available
+* [ ] Floating scrollbar
 
 ## Installation
 

@@ -1,11 +1,11 @@
 {
   "name" : "Pretius Freeze Report",
   "version" : "1.0.0",
-  "description" : "Pretius Freeze Report is dynamic action plugin for freezing columns and header of classic report. By deviding the report on four sections it is possible to freeze any number of columns and choose what type of freeze we want to choose.",
-  "keywords" : ["clasic report", "freeze", "header", "columns"],
-  "homepage" : "https://github.com/sypulabartosz/Pretius-Freeze-Report",
+  "description" : "Pretius APEX Extend Classic Report is dynamic action plugin for freezing columns and header of classic report. By deviding the report on four sections it is possible to freeze any number of columns and choose what type of freeze we want to choose.",
+  "keywords" : ["clasic report", "freeze", "header", "columns","scrollbar"],
+  "homepage" : "https://github.com/sypulabartosz/Pretius-APEX-Extend-Classic-Report",
   "bugs" : {
-    "url" : "https://github.com/sypulabartosz/Pretius-Freeze-Report/issues",
+    "url" : "https://github.com/sypulabartosz/Pretius-APEX-Extend-Classic-Report/issues",
     "email" : "bartosz.sypula94@gmail.com"
   },
   "license" : "MIT",
@@ -17,7 +17,7 @@
   },
   "repository" : {
     "type" : "git",
-    "url" : "https://github.com/sypulabartosz/Pretius-Freeze-Report.git"
+    "url" : "https://github.com/sypulabartosz/Pretius-APEX-Extend-Classic-Report.git"
   },
   "oracle": {
     "versions": [
@@ -34,10 +34,10 @@
         "19.2.0"
       ],
       "plugin" : {
-        "internalName" : "PRETIUS_FREEZE_REPORT",
+        "internalName" : "PRETIUS_EXTEND_CLASSIC_REPORT",
         "type" : "dynamic action",
-        "demo" : "https://apex.oracle.com/pls/apex/f?p=PRETIUS_FREEZE_REPORT:100",
-        "previewImage" : "to_fill"
+        "demo" : "https://apex.oracle.com/pls/apex/f?p=PRETIUS_EXTEND_CLASSIC_REPORT:100",
+        "previewImage": "https://https://github.com/sypulabartosz/Pretius-APEX-Extend-Classic-Report/blob/master/images/pretius_apex_extend_classic_report_gif.gif?raw=true"
       }
     }
   }
