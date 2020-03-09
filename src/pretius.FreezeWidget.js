@@ -7,6 +7,7 @@ $.widget('pretius.freezeWidget', {
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget options', this.options);
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget element', this.element);
 
+    this.new_raport = this.element.find('div[id*="catch"]');
     this.options ={
       freeze_columns : this.options.plugin.action.attribute01 ? this.options.plugin.action.attribute01.indexOf('freeze_column') > -1 : false,
       freeze_header : this.options.plugin.action.attribute01 ? this.options.plugin.action.attribute01.indexOf('freeze_header') > -1 : false,
@@ -71,7 +72,7 @@ $.widget('pretius.freezeWidget', {
       this._show_error_page_message(this.options.error_message.freeze_col_smaler_than_0);
       this.not_proper_column_value = true;
     }
-    else if(table_wrap.find('tbody tr:first td:nth-child('+this.options.number_of_columns_to_freeze+')').offset().left + table_wrap.find('tbody tr:first td:nth-child('+this.options.number_of_columns_to_freeze+')').outerWidth() >table_wrap.outerWidth() + table_wrap.offset().left){
+    else if(table_wrap.find('tbody tr:first td:nth-child('+this.options.number_of_columns_to_freeze+')').offset().left + table_wrap.find('tbody tr:first td:nth-child('+this.options.number_of_columns_to_freeze+')').outerWidth() >this.new_raport.outerWidth() + this.new_raport.offset().left){
       apex.debug.message(apex.debug.LOG_LEVEL.WARNING,this.name,'The width of freeze columns is to much to freeze report properly');
       this._show_error_page_message(this.options.error_message.not_proper_col_amount);
       this.not_proper_column_value = true;
@@ -102,7 +103,7 @@ $.widget('pretius.freezeWidget', {
   },
   _show_error_page_message: function (p_message) { 
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_show_error_page_message');
-    apex.message.clearErrors();
+    //apex.message.clearErrors();
     apex.message.showErrors([
       {
         type:       "error",
@@ -402,18 +403,18 @@ $.widget('pretius.freezeWidget', {
       header_offset_top_relative = this.report_tdivs.thead.offset().top,
       thead_height = this.report_tdivs.thead.height(),
       header_height = $('.t-Header').height(),
+      body_title_height = $('.t-Body-title').height(),
       event_scroll_selector = this.options.reportregion_id;
     this.theadPosition = "relative";
 
     $(window).on('scroll.'+event_scroll_selector, $.proxy(function(event){
       apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis scroll event',{'event':event});
-      var page_header_height = $('.t-Header').height();
-
+      //var page_header_height = $('.t-Header').height() + $('.t-Body-title').height();
+      var page_header_height = body_title_height + header_height;
       if(this.theadPosition === "fixed"){
         
-        if($(window).scrollTop() + header_height < header_offset_top_fixed || $(window).scrollTop() + header_height > header_offset_top_fixed + tableWrap_height - thead_height){
+        if($(window).scrollTop() + header_height +body_title_height< header_offset_top_fixed || $(window).scrollTop() + header_height + body_title_height> header_offset_top_fixed + tableWrap_height - thead_height){
       
-
           this.report_divs.freeze_header_div.css("left",0);
           this.report_divs.header_div.css("left", 0);
           this.theadPosition = "relative";
@@ -433,7 +434,7 @@ $.widget('pretius.freezeWidget', {
         }
       }else if(this.theadPosition === "relative"){
         
-        if($(window).scrollTop() + header_height >header_offset_top_relative && $(window).scrollTop() + header_height < header_offset_top_relative + tableWrap_height - thead_height){
+        if($(window).scrollTop() + header_height +body_title_height > header_offset_top_relative && $(window).scrollTop() + header_height + body_title_height < header_offset_top_relative + tableWrap_height - thead_height){
 
           this.report_tdivs.thead.css("position", "fixed");
           this.theadPosition = "fixed";
