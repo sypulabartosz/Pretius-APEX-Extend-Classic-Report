@@ -28,7 +28,7 @@ prompt APPLICATION 10516 - Pretius APEX Extend Classic Report
 -- Application Export:
 --   Application:     10516
 --   Name:            Pretius APEX Extend Classic Report
---   Date and Time:   15:21 Friday February 28, 2020
+--   Date and Time:   10:35 Monday March 9, 2020
 --   Exported By:     BSYPULA@PRETIUS.COM
 --   Flashback:       0
 --   Export Type:     Component Export
@@ -53,7 +53,8 @@ wwv_flow_api.create_plugin(
 ,p_display_name=>'Pretius APEX Extend Classic Report'
 ,p_category=>'COMPONENT'
 ,p_supported_ui_types=>'DESKTOP'
-,p_image_prefix=>'http://127.0.0.1:8887/freezeWidget/plugin_files/release_1_0/'
+,p_javascript_file_urls=>'#PLUGIN_FILES#pretius.FreezeWidget.js'
+,p_css_file_urls=>'#PLUGIN_FILES#pretius.FreezeWidget.css'
 ,p_plsql_code=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'function render (',
 '  p_dynamic_action in apex_plugin.t_dynamic_action,',
