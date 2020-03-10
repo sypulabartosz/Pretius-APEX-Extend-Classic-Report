@@ -56,9 +56,8 @@ $.widget('pretius.freezeWidget', {
   },
   window_resize_report: function( pEvent ){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'window_resize_report', pEvent);
-    // retrive report settings
-    //this.report_divs = this._get_divs();
-    this._set_cell_Widths();
+     this._set_cell_Heights();
+     this._set_cell_Widths();
   }, 
   destroy: function(){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'destroy');
@@ -421,7 +420,7 @@ $.widget('pretius.freezeWidget', {
       var page_header_height = body_title_height + header_height;
       if(this.theadPosition === "fixed"){
         
-        if($(window).scrollTop() + header_height +body_title_height< header_offset_top_fixed || $(window).scrollTop() + header_height + body_title_height> header_offset_top_fixed + tableWrap_height - thead_height){
+        if($(window).scrollTop() + page_header_height< header_offset_top_fixed || $(window).scrollTop() + page_header_height> header_offset_top_fixed + tableWrap_height - thead_height){
       
           this.report_divs.freeze_header_div.css("left",0);
           this.report_divs.header_div.css("left", 0);
@@ -442,7 +441,7 @@ $.widget('pretius.freezeWidget', {
         }
       }else if(this.theadPosition === "relative"){
         
-        if($(window).scrollTop() + header_height +body_title_height > header_offset_top_relative && $(window).scrollTop() + header_height + body_title_height < header_offset_top_relative + tableWrap_height - thead_height){
+        if($(window).scrollTop() + page_header_height > header_offset_top_relative && $(window).scrollTop() + page_header_height < header_offset_top_relative + tableWrap_height - thead_height){
 
           this.report_tdivs.thead.css("position", "fixed");
           this.theadPosition = "fixed";
