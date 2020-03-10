@@ -35,6 +35,8 @@ $.widget('pretius.freezeWidget', {
     //events on refresh of report
     this.element.bind('apexbeforerefresh', $.proxy( this.before_report_refresh, this ));
     this.element.bind('apexafterrefresh', $.proxy( this.after_report_refresh, this ));
+    // events on apexwindowresized
+    $(window).bind('apexwindowresized', $.proxy( this.window_resize_report, this ));
     }
   },
   after_report_refresh: function( pEvent ){
@@ -51,7 +53,13 @@ $.widget('pretius.freezeWidget', {
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'before_report_refresh');
     $(window).off('scroll.'+this.options.reportregion_id);
     this.plugin_settings.scrollX_value = this.scrollElement.scrollLeft();
-  },  
+  },
+  window_resize_report: function( pEvent ){
+    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'window_resize_report', pEvent);
+    // retrive report settings
+    //this.report_divs = this._get_divs();
+    this._set_cell_Widths();
+  }, 
   destroy: function(){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'destroy');
   },
