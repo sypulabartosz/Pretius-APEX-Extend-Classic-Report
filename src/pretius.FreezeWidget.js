@@ -409,15 +409,15 @@ $.widget('pretius.freezeWidget', {
       tableWrap_height = this.new_raport.find('.t-Report-tableWrap').height(),
       header_offset_top_relative = this.report_tdivs.thead.offset().top,
       thead_height = this.report_tdivs.thead.height(),
-      header_height = $('.t-Header').height(),
-      body_title_height = $('.t-Body-title').height(),
       event_scroll_selector = this.options.reportregion_id;
     this.theadPosition = "relative";
 
     $(window).on('scroll.'+event_scroll_selector, $.proxy(function(event){
       apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis scroll event',{'event':event});
       //var page_header_height = $('.t-Header').height() + $('.t-Body-title').height();
-      var page_header_height = body_title_height + header_height;
+      var header_height = $('.t-Header').height(),
+      body_title_height = $('.t-Body-title').height(),
+      page_header_height = body_title_height + header_height;
       if(this.theadPosition === "fixed"){
         
         if($(window).scrollTop() + page_header_height< header_offset_top_fixed || $(window).scrollTop() + page_header_height> header_offset_top_fixed + tableWrap_height - thead_height){
@@ -438,6 +438,10 @@ $.widget('pretius.freezeWidget', {
           });
           //actualizing scroll
           this.report_divs.header_div.css("left",- this.scrollElement.scrollLeft());      
+        }else{
+          if(header_offset_top_relative != page_header_height){
+            this.report_tdivs.thead.css("top",page_header_height);
+          }
         }
       }else if(this.theadPosition === "relative"){
         
