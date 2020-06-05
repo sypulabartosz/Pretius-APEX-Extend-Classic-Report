@@ -19,6 +19,7 @@ MIT
 * compatible with Oracle APEX 5.1, 18.x, 19.x
 * freeze column in classic report
 * freeze headers in classic report
+* freezing also works in modal dialog pages
 
 ## Roadmap
 * [ ] Floating scrollbar
