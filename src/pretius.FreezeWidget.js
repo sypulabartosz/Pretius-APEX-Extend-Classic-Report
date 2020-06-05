@@ -21,7 +21,9 @@ $.widget('pretius.freezeWidget', {
       }
     };
     this.plugin_settings = {
-      backgroundcolor: this.element.css("background-color")
+      backgroundcolor: this.element.css("background-color"),
+      IsModal : $(".t-Dialog-bodyWrapperIn").is(":visible") ? 1: 0,
+      scrollYSelector : $(".t-Dialog-bodyWrapperIn").is(":visible") ? $(".t-Dialog-bodyWrapperIn"): $(document)
     };
     // check restrictions for freezeing columns
     if(this.options.freeze_columns){
@@ -36,7 +38,7 @@ $.widget('pretius.freezeWidget', {
     this.element.bind('apexbeforerefresh', $.proxy( this.before_report_refresh, this ));
     this.element.bind('apexafterrefresh', $.proxy( this.after_report_refresh, this ));
     // events on apexwindowresized
-    $(window).bind('apexwindowresized', $.proxy( this.window_resize_report, this ));
+    this.plugin_settings.scrollYSelector.bind('apexwindowresized', $.proxy( this.window_resize_report, this ));
     }
   },
   after_report_refresh: function( pEvent ){
@@ -44,14 +46,14 @@ $.widget('pretius.freezeWidget', {
     // retrive report settings
     this._set_default_settings();
     //refresh scrolls
-    window.scrollTo(0,window.scrollY+1);
-    window.scrollTo(0,window.scrollY-1);
+    this.plugin_settings.scrollYSelector.scrollTop(this.plugin_settings.scrollYSelector.scrollTop()+1);
+    this.plugin_settings.scrollYSelector.scrollTop(this.plugin_settings.scrollYSelector.scrollTop()-1);
     this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value+1);
     this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value-1);
   },
   before_report_refresh: function( pEvent ){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'before_report_refresh');
-    $(window).off('scroll.'+this.options.reportregion_id);
+    this.plugin_settings.scrollYSelector.off('scroll.'+this.options.reportregion_id);
     this.plugin_settings.scrollX_value = this.scrollElement.scrollLeft();
   },
   window_resize_report: function( pEvent ){
@@ -403,24 +405,24 @@ $.widget('pretius.freezeWidget', {
 
   },
   _scroll_y_axis: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis');
+    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis',this.plugin_settings);
 
-    var header_offset_top_fixed = this.new_raport.find('.t-Report-tableWrap').offset().top,
+    var header_offset_top_fixed = this.plugin_settings.IsModal == 1 ? this.new_raport.find('.t-Report-tableWrap').offset().top + this.plugin_settings.scrollYSelector.scrollTop() : this.new_raport.find('.t-Report-tableWrap').offset().top,
       tableWrap_height = this.new_raport.find('.t-Report-tableWrap').height(),
-      header_offset_top_relative = this.report_tdivs.thead.offset().top,
+      header_offset_top_relative = this.plugin_settings.IsModal == 1 ? this.report_tdivs.thead.offset().top + this.plugin_settings.scrollYSelector.scrollTop() : this.report_tdivs.thead.offset().top,
       thead_height = this.report_tdivs.thead.height(),
       event_scroll_selector = this.options.reportregion_id;
     this.theadPosition = "relative";
 
-    $(window).on('scroll.'+event_scroll_selector, $.proxy(function(event){
+    this.plugin_settings.scrollYSelector.on('scroll.'+event_scroll_selector, $.proxy(function(event){
       apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis scroll event',{'event':event});
-      //var page_header_height = $('.t-Header').height() + $('.t-Body-title').height();
-      var header_height = $('.t-Header').height(),
-      body_title_height = $('.t-Body-title').height(),
+      var header_height = $('.t-Header').height() ? $('.t-Header').height() : 0,
+      body_title_height = $('.t-Body-title').height() ? $('.t-Body-title').height() : 0,
       page_header_height = body_title_height + header_height;
+
       if(this.theadPosition === "fixed"){
         
-        if($(window).scrollTop() + page_header_height< header_offset_top_fixed || $(window).scrollTop() + page_header_height> header_offset_top_fixed + tableWrap_height - thead_height){
+        if(this.plugin_settings.scrollYSelector.scrollTop() + page_header_height< header_offset_top_fixed || this.plugin_settings.scrollYSelector.scrollTop() + page_header_height> header_offset_top_fixed + tableWrap_height - thead_height){
       
           this.report_divs.freeze_header_div.css("left",0);
           this.report_divs.header_div.css("left", 0);
@@ -445,7 +447,7 @@ $.widget('pretius.freezeWidget', {
         }
       }else if(this.theadPosition === "relative"){
         
-        if($(window).scrollTop() + page_header_height > header_offset_top_relative && $(window).scrollTop() + page_header_height < header_offset_top_relative + tableWrap_height - thead_height){
+        if(this.plugin_settings.scrollYSelector.scrollTop() + page_header_height > header_offset_top_relative && this.plugin_settings.scrollYSelector.scrollTop() + page_header_height < header_offset_top_relative + tableWrap_height - thead_height){
 
           this.report_tdivs.thead.css("position", "fixed");
           this.theadPosition = "fixed";
