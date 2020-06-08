@@ -57,7 +57,7 @@ Author | Github | Twitter | E-mail
 -------|-------|---------|-------
 Bartosz Sypuła | [@sypulabartosz](https://github.com/sypulabartosz) | [@sypulabartosz](https://twitter.com/sypulabartosz) | bsypula@pretius.com
 
-Thanks to @bostrowski for pro tips, which I received and help in creation of the plugin
+Thanks to [@bostrowski] for pro tips, which I received and help in creation of the plugin
 ## About Pretius
 Pretius Sp. z o.o. Sp. K.
 
