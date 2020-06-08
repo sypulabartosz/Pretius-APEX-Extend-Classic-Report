@@ -38,7 +38,7 @@ $.widget('pretius.freezeWidget', {
     this.element.bind('apexbeforerefresh', $.proxy( this.before_report_refresh, this ));
     this.element.bind('apexafterrefresh', $.proxy( this.after_report_refresh, this ));
     // events on apexwindowresized
-    this.plugin_settings.scrollYSelector.bind('apexwindowresized', $.proxy( this.window_resize_report, this ));
+    $(window).bind('apexwindowresized', $.proxy( this.window_resize_report, this ));
     }
   },
   after_report_refresh: function( pEvent ){
@@ -58,8 +58,10 @@ $.widget('pretius.freezeWidget', {
   },
   window_resize_report: function( pEvent ){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'window_resize_report', pEvent);
-     this._set_cell_Heights();
-     this._set_cell_Widths();
+    
+    this._set_cell_Heights();
+    this._set_cell_Widths();
+
   }, 
   destroy: function(){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'destroy');
@@ -268,8 +270,8 @@ $.widget('pretius.freezeWidget', {
       this.new_raport_table_wrapper
         .find('.thead_div th')
         .eq(th_index)
-        .css({"min-width": outer_cell_width,
-              "max-width": outer_cell_width
+        .css({"min-width": outer_cell_width
+             ,"max-width": outer_cell_width
             });
       if(th_index < this.options.number_of_columns_to_freeze){
         $.each(this.new_raport_table_wrapper.find(".tbody_div > .freeze_div > table tr"), $.proxy(function(tr_index, elem) {
@@ -287,13 +289,29 @@ $.widget('pretius.freezeWidget', {
             .filter( $.proxy(function(index) {
               return index == (th_index - this.options.number_of_columns_to_freeze);
             }, this))
-            .css("min-width", outer_cell_width);          
+            .css({"min-width": outer_cell_width,
+            "max-width" : outer_cell_width
+      }
+            );          
         }, this) );
       }      
     }, this) );
 
-    this.report_divs.header_div.width(this.new_raport.width() - this.report_divs.freeze_header_div.width());
+    //this.report_divs.header_div.width(this.new_raport.width() - this.report_divs.freeze_header_div.width());
     this.report_divs.standard_div.width(this.new_raport.width() - this.report_divs.freeze_div.width());
+
+    if(this.report_divs.standard_div.width()> this.report_divs.standard_div.find('.t-Report-report').width()){
+      this.report_divs.header_div.width(this.report_divs.standard_div.find('.t-Report-report').width());
+      this.new_raport_table_wrapper.find('.standard_div tr td:last-child').css('border-right','');
+      this.new_raport_table_wrapper.find('.header_div tr th:last-child').css('border-right','');
+    }else{
+      this.report_divs.header_div.width(this.new_raport.width() - this.report_divs.freeze_header_div.width());
+      this.new_raport_table_wrapper.find('.standard_div tr td:last-child').css('border-right','none');
+      this.new_raport_table_wrapper.find('.header_div tr th:last-child').css('border-right','none');
+    }
+    
+    //this.report_divs.header_div.width(this.report_divs.standard_div.width());
+
   },
   _set_cell_Heights: function(){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_cell_Heights');
@@ -413,6 +431,7 @@ $.widget('pretius.freezeWidget', {
       thead_height = this.report_tdivs.thead.height(),
       event_scroll_selector = this.options.reportregion_id;
     this.theadPosition = "relative";
+
 
     this.plugin_settings.scrollYSelector.on('scroll.'+event_scroll_selector, $.proxy(function(event){
       apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis scroll event',{'event':event});
