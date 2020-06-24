@@ -39,6 +39,8 @@ $.widget('pretius.freezeWidget', {
     this.element.bind('apexafterrefresh', $.proxy( this.after_report_refresh, this ));
     // events on apexwindowresized
     $(window).bind('apexwindowresized', $.proxy( this.window_resize_report, this ));
+    this.add_resize_observer();
+
     }
   },
   after_report_refresh: function( pEvent ){
@@ -56,6 +58,19 @@ $.widget('pretius.freezeWidget', {
     this.plugin_settings.scrollYSelector.off('scroll.'+this.options.reportregion_id);
     this.plugin_settings.scrollX_value = this.scrollElement.scrollLeft();
   },
+  add_resize_observer: function( ){
+    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'add_resize_observer');
+    let widget = this;
+    const myObserver = new ResizeObserver(function(entries) {
+      entries.forEach(function(entry) {
+        widget._set_cell_Heights();
+        widget._set_cell_Widths();
+      });
+    });
+
+    myObserver.observe(this.element[0]);
+
+  }, 
   window_resize_report: function( pEvent ){
     apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'window_resize_report', pEvent);
     
