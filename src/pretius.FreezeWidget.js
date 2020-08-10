@@ -1,11 +1,21 @@
+"use strict";
 $.widget('pretius.freezeWidget', {
+  
+
+  C_PLUGIN_NAME      : 'Pretius APEX Extend Classic Report',
+  C_LOG_PREFIX       : 'Extend Classic Report: ',
+  C_LOG_LVL_ERROR    : debug.LOG_LEVEL.ERROR,         // value 1 (end-user)  
+  C_LOG_LVL_WARNING  : debug.LOG_LEVEL.WARN,          // value 2 (developer)
+  C_LOG_LVL_DEBUG    : debug.LOG_LEVEL.INFO,          // value 4 (debug)
+  C_LOG_LVL_6        : debug.LOG_LEVEL.APP_TRACE,     // value 6 
+  C_LOG_LVL_9        : debug.LOG_LEVEL.ENGINE_TRACE,  // value 9
+
   _create: function(){
-    this.name = 'Freeze widget: ';
     this._super( this.options );
     
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'initialize widget');
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget options', this.options);
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name, 'widget element', this.element);
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'initialize widget');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME, 'widget options', this.options);
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME, 'widget element', this.element);
 
     this.new_raport = this.element.find('div[id*="catch"]');
     this.options ={
@@ -44,7 +54,7 @@ $.widget('pretius.freezeWidget', {
     }
   },
   after_report_refresh: function( pEvent ){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'after_report_refresh', pEvent);
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'after_report_refresh', pEvent);
     // retrive report settings
     this._set_default_settings();
     //refresh scrolls
@@ -54,12 +64,12 @@ $.widget('pretius.freezeWidget', {
     this.scrollElement.scrollLeft(this.plugin_settings.scrollX_value-1);
   },
   before_report_refresh: function( pEvent ){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'before_report_refresh');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'before_report_refresh');
     this.plugin_settings.scrollYSelector.off('scroll.'+this.options.reportregion_id);
     this.plugin_settings.scrollX_value = this.scrollElement.scrollLeft();
   },
   add_resize_observer: function( ){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'add_resize_observer');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'add_resize_observer');
     let widget = this;
     const myObserver = new ResizeObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -72,34 +82,34 @@ $.widget('pretius.freezeWidget', {
 
   }, 
   window_resize_report: function( pEvent ){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'window_resize_report', pEvent);
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'window_resize_report', pEvent);
     
     this._set_cell_Heights();
     this._set_cell_Widths();
 
   }, 
   destroy: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'destroy');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'destroy');
   },
   _check_proper_ammount_of_columns: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_check_proper_ammount_of_columns',{'columns to freeze': this.options.number_of_columns_to_freeze,'max columns':this.options.max_column_amount});
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_check_proper_ammount_of_columns',{'columns to freeze': this.options.number_of_columns_to_freeze,'max columns':this.options.max_column_amount});
     var table_wrap = this.element.find('.t-Report-tableWrap');
     
     if(this.options.number_of_columns_to_freeze == null){
       this.not_proper_column_value = false;
     }
     else if(this.options.number_of_columns_to_freeze > this.options.max_column_amount){
-      apex.debug.message(apex.debug.LOG_LEVEL.WARNING,this.name,'Number of columns to freeze is larger than number of all raport columns');
+      apex.debug.message(C_LOG_LVL_ERROR,C_PLUGIN_NAME,'Number of columns to freeze is larger than number of all raport columns');
       this._show_error_page_message(this.options.error_message.to_much_freeze_col);
       this.not_proper_column_value = true;
     }else if(this.options.number_of_columns_to_freeze < 0){
-      apex.debug.message(apex.debug.LOG_LEVEL.WARNING,this.name,'Number of columns to freeze is less than 0');
+      apex.debug.message(C_LOG_LVL_ERROR,C_PLUGIN_NAME,'Number of columns to freeze is less than 0');
 
       this._show_error_page_message(this.options.error_message.freeze_col_smaler_than_0);
       this.not_proper_column_value = true;
     }
     else if(table_wrap.find('tbody tr:first td:nth-child('+this.options.number_of_columns_to_freeze+')').offset().left + table_wrap.find('tbody tr:first td:nth-child('+this.options.number_of_columns_to_freeze+')').outerWidth() >this.new_raport.outerWidth() + this.new_raport.offset().left){
-      apex.debug.message(apex.debug.LOG_LEVEL.WARNING,this.name,'The width of freeze columns is to much to freeze report properly');
+      apex.debug.message(C_LOG_LVL_ERROR,C_PLUGIN_NAME,'The width of freeze columns is to much to freeze report properly');
       this._show_error_page_message(this.options.error_message.not_proper_col_amount);
       this.not_proper_column_value = true;
     }
@@ -108,27 +118,27 @@ $.widget('pretius.freezeWidget', {
     }
   },
   _destroy: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_destroy');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_destroy');
   },
 
   _setOption: function( p_key, p_value ) {
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_setOption',{'p_key': p_key,'p_value':p_value});
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_setOption',{'p_key': p_key,'p_value':p_value});
     if ( p_key === "value" ) {
       p_value = this._constrain( p_value );
     }
     this._super( p_key, p_value );
   },
   options: function( p_options ){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'options');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'options');
     this._super( p_options );
   },
 
   _setOptions: function( p_options ) {
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_setOptions');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_setOptions');
     this._super( p_options );
   },
   _show_error_page_message: function (p_message) { 
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_show_error_page_message');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_show_error_page_message');
     //apex.message.clearErrors();
     apex.message.showErrors([
       {
@@ -162,7 +172,7 @@ $.widget('pretius.freezeWidget', {
 
   },
   _set_freeze_headers_div: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_freeze_headers_div');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_set_freeze_headers_div');
 
     var freeze_header_div = $('<div></div>').addClass('freeze_header_div')
       .css({"background-color" : this.plugin_settings.backgroundcolor,"z-index" : 3 });
@@ -178,7 +188,7 @@ $.widget('pretius.freezeWidget', {
     return freeze_header_div;
   },
   _set_freeze_div: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_freeze_div');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_set_freeze_div');
     var freeze_div  =  
       $('<div></div>')
         .addClass('freeze_div')
@@ -201,7 +211,7 @@ $.widget('pretius.freezeWidget', {
     return freeze_div;
   },
   _set_headers_div: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_headers_div');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_set_headers_div');
     var header_div =  $('<div></div>');
     header_div
       .addClass('header_div')
@@ -223,7 +233,7 @@ $.widget('pretius.freezeWidget', {
   },
 
   _set_standard_div: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_standard_div');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_set_standard_div');
     var standard_div = $('<div></div>').addClass('standard_div');
     var standard_table = this.new_raport_table.clone(true);
 
@@ -242,7 +252,7 @@ $.widget('pretius.freezeWidget', {
 
   },
   _get_divs: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_get_divs');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_get_divs');
     //division on four divs
     var widget_divs_json;
 
@@ -255,7 +265,7 @@ $.widget('pretius.freezeWidget', {
     return widget_divs_json;
   },
   _get_tdivs: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_get_tdivs',this.new_raport.width());
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_get_tdivs',this.new_raport.width());
     //creating containers for head and body
     var tdivs_json;
     var thead_div = $('<div></div>')
@@ -277,7 +287,7 @@ $.widget('pretius.freezeWidget', {
     return tdivs_json;
   },
   _set_cell_Widths: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_cell_Widths',{'number_of_columns_to_freeze':this.options.number_of_columns_to_freeze, 'width of catch div':this.new_raport.width(), 'width of freeze header div': this.report_divs.freeze_header_div});
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_set_cell_Widths',{'number_of_columns_to_freeze':this.options.number_of_columns_to_freeze, 'width of catch div':this.new_raport.width(), 'width of freeze header div': this.report_divs.freeze_header_div});
 
     $.each(this.new_raport_table_wrapper.children('table').find('th'), $.proxy(function(th_index, elem) {
       
@@ -329,7 +339,7 @@ $.widget('pretius.freezeWidget', {
 
   },
   _set_cell_Heights: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_set_cell_Heights');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_set_cell_Heights');
     //setting heights of header divs
     this.report_divs.freeze_header_div.height(this.new_raport_table_wrapper.children('table').find('thead tr').outerHeight());
     this.report_divs.header_div.height(this.new_raport_table_wrapper.children('table').find('thead tr').outerHeight());
@@ -370,7 +380,7 @@ $.widget('pretius.freezeWidget', {
     this.new_raport_table_wrapper.find('.header_div tr th:first-child').css('border-left','none');
   },
   _find_overflow_element: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_find_overflow_element');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_find_overflow_element');
     var elem = this.report_divs.standard_div;
     var visible_scroll = this._getScrollParent(elem);
     visible_scroll.css('overflow-x','hidden');
@@ -381,7 +391,7 @@ $.widget('pretius.freezeWidget', {
     elem.css('overflow-x', 'scroll');
   },
   _getScrollParent: function(pnode) {
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_getScrollParent');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_getScrollParent');
     if (pnode == null) {
       return null;
     }
@@ -392,7 +402,7 @@ $.widget('pretius.freezeWidget', {
     }
   },
   _add_scrolls: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'f',{'freeze_columns type':this.options.freeze_columns, 'freeze_header type':this.options.freeze_header});
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'f',{'freeze_columns type':this.options.freeze_columns, 'freeze_header type':this.options.freeze_header});
     //add scroll events depending on declare freeze type
     // freeze only columns
     if(this.options.freeze_columns && !this.options.freeze_header){
@@ -422,10 +432,10 @@ $.widget('pretius.freezeWidget', {
   },
   _scroll_x_header_axis: function(){
     
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_x_header_axis');
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_scroll_x_header_axis');
     
       this.scrollElement.scroll($.proxy(function (event) {
-        apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_x_header_axis scroll event',{'event':event});
+        apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_scroll_x_header_axis scroll event',{'event':event});
         if(this.report_tdivs.thead.css("position") === "fixed"){
           this.report_divs.header_div.css("left", - this.scrollElement.scrollLeft());
           this.report_divs.freeze_header_div.css("left",0);
@@ -438,7 +448,7 @@ $.widget('pretius.freezeWidget', {
 
   },
   _scroll_y_axis: function(){
-    apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis',this.plugin_settings);
+    apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_scroll_y_axis',this.plugin_settings);
 
     var header_offset_top_fixed = this.plugin_settings.IsModal == 1 ? this.new_raport.find('.t-Report-tableWrap').offset().top + this.plugin_settings.scrollYSelector.scrollTop() : this.new_raport.find('.t-Report-tableWrap').offset().top,
       tableWrap_height = this.new_raport.find('.t-Report-tableWrap').height(),
@@ -449,7 +459,7 @@ $.widget('pretius.freezeWidget', {
 
 
     this.plugin_settings.scrollYSelector.on('scroll.'+event_scroll_selector, $.proxy(function(event){
-      apex.debug.message(apex.debug.LOG_LEVEL.INFO,this.name,'_scroll_y_axis scroll event',{'event':event});
+      apex.debug.message(C_LOG_LVL_DEBUG,C_PLUGIN_NAME,'_scroll_y_axis scroll event',{'event':event});
       var header_height = $('.t-Header').height() ? $('.t-Header').height() : 0,
       body_title_height = $('.t-Body-title').height() ? $('.t-Body-title').height() : 0,
       page_header_height = body_title_height + header_height;

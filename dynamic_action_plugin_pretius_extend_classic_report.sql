@@ -28,7 +28,7 @@ prompt APPLICATION 10516 - Pretius APEX Extend Classic Report
 -- Application Export:
 --   Application:     10516
 --   Name:            Pretius APEX Extend Classic Report
---   Date and Time:   15:31 Wednesday June 24, 2020
+--   Date and Time:   15:26 Monday August 10, 2020
 --   Exported By:     BSYPULA@PRETIUS.COM
 --   Flashback:       0
 --   Export Type:     Component Export
