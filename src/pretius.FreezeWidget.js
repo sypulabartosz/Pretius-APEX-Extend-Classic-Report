@@ -1,14 +1,15 @@
-"use strict";
+(function (debug, $){
+  "use strict";
 $.widget('pretius.freezeWidget', {
   
 
   C_PLUGIN_NAME      : 'Pretius APEX Extend Classic Report',
   C_LOG_PREFIX       : 'Extend Classic Report: ',
-  C_LOG_LVL_ERROR    : apex.debug.LOG_LEVEL.ERROR,         // value 1 (end-user)  
-  C_LOG_LVL_WARNING  : apex.debug.LOG_LEVEL.WARN,          // value 2 (developer)
-  C_LOG_LVL_DEBUG    : apex.debug.LOG_LEVEL.INFO,          // value 4 (debug)
-  C_LOG_LVL_6        : apex.debug.LOG_LEVEL.APP_TRACE,     // value 6 
-  C_LOG_LVL_9        : apex.debug.LOG_LEVEL.ENGINE_TRACE,  // value 9
+  C_LOG_LVL_ERROR    : debug.LOG_LEVEL.ERROR,         // value 1 (end-user)  
+  C_LOG_LVL_WARNING  : debug.LOG_LEVEL.WARN,          // value 2 (developer)
+  C_LOG_LVL_DEBUG    : debug.LOG_LEVEL.INFO,          // value 4 (debug)
+  C_LOG_LVL_6        : debug.LOG_LEVEL.APP_TRACE,     // value 6 
+  C_LOG_LVL_9        : debug.LOG_LEVEL.ENGINE_TRACE,  // value 9
 
   _create: function(){
     this._super( this.options );
@@ -512,3 +513,4 @@ $.widget('pretius.freezeWidget', {
     },this));
   }
 });
+})(apex.debug, apex.jQuery );
