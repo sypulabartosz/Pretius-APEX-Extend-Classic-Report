@@ -8,7 +8,7 @@ In many situations, Classic Reports have multiple columns and users want to have
 
 ## Preview
 
-![Preview gif](images/pretius_apex_extend_classic_report_gif.gif)
+![Preview gif](images/pretius_extend_classic_report_gif.gif)
 
 
 ## License
