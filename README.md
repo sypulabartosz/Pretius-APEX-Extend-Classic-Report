@@ -1,10 +1,10 @@
-# Pretius APEX Extend Classic Report
+# Pretius Extend Classic Report
 
-Pretius APEX Extend Classic Report is dynamic action plugin for freezing columns and header of classic report in Oracle Application Express(APEX).
+Pretius Extend Classic Report is dynamic action plugin for freezing columns and header of classic report in Oracle Application Express(APEX).
 
 ## Information about plugin
 
-In many situations, Classic Reports have multiple columns and users want to have a key column visible all the time even if horizontal scroll appeared. The best solution for this problem is to freeze these key columns to make them all the time visible. In classic report this kind of option is not available. The same happens with headers if the vertical scroll appeared it is very useful to have freeze header stick to the top of browser window. For these particular cases The Pretius APEX Extend Classic Report was created.
+In many situations, Classic Reports have multiple columns and users want to have a key column visible all the time even if horizontal scroll appeared. The best solution for this problem is to freeze these key columns to make them all the time visible. In classic report this kind of option is not available. The same happens with headers if the vertical scroll appeared it is very useful to have freeze header stick to the top of browser window. For these particular cases The Pretius Extend Classic Report was created.
 
 ## Preview
 
@@ -26,10 +26,8 @@ MIT
 
 ## Installation
 
-### Installation package
-*  src/dynamic_action_plugin_pretius_extend_classic_report.sql - the plugin installation file for Oracle APEX apps
 ### Install procedure
-Using Oracle APEX plugin wizard install the plugin file src/dynamic_action_plugin_pretius_extend_classic_report.sql
+Using Oracle APEX plugin wizard install the plugin file dynamic_action_plugin_pretius_extend_classic_report.sql
 
 ## Demo application
 
@@ -63,7 +61,7 @@ Pretius Sp. z o.o. Sp. K.
 
 Address | Website | E-mail
 --------|---------|-------
-Przy Parku 2/2 Warsaw 02-384, Poland | [http://www.pretius.com](http://www.pretius.com) | [office@pretius.com](mailto:office@pretius.com)
+Żwirki i Wigury 16A, 02-092 Warsaw, Poland | [http://www.pretius.com](http://www.pretius.com) | [office@pretius.com](mailto:office@pretius.com)
 
 ## Support
 Our plugins are free to use but in some cases you might need to contact us. We are willing to assist you but in certain circumstances you will be charged for our time spent on helping you. Please keep in mind we do our best to keep documentation up to date and we won't answer question for which there is explaination in documentation (at github and as help text in application builder).

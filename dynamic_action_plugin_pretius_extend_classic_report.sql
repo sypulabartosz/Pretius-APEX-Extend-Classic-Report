@@ -23,12 +23,12 @@ wwv_flow_api.import_begin (
 end;
 /
  
-prompt APPLICATION 10516 - Pretius APEX Extend Classic Report
+prompt APPLICATION 10516 - Pretius Extend Classic Report
 --
 -- Application Export:
 --   Application:     10516
---   Name:            Pretius APEX Extend Classic Report
---   Date and Time:   10:50 Tuesday August 11, 2020
+--   Name:            Pretius Extend Classic Report
+--   Date and Time:   10:48 Tuesday August 18, 2020
 --   Exported By:     BSYPULA@PRETIUS.COM
 --   Flashback:       0
 --   Export Type:     Component Export
@@ -50,7 +50,7 @@ wwv_flow_api.create_plugin(
  p_id=>wwv_flow_api.id(28076149343130605623)
 ,p_plugin_type=>'DYNAMIC ACTION'
 ,p_name=>'PRETIUS_EXTEND_CLASSIC_REPORT'
-,p_display_name=>'Pretius APEX Extend Classic Report'
+,p_display_name=>'Pretius Extend Classic Report'
 ,p_category=>'COMPONENT'
 ,p_supported_ui_types=>'DESKTOP'
 ,p_javascript_file_urls=>'#PLUGIN_FILES#pretius.FreezeWidget.js'
@@ -115,7 +115,7 @@ wwv_flow_api.create_plugin(
 ,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<strong>About plugin</strong>',
 '<p>',
-'  Pretius Freeze Report is dynamic action plugin for freezing columns and header of classic report.',
+'  Pretius Extend Classic Report is dynamic action plugin for freezing columns and header of classic report.',
 '</p>',
 '<p>',
 '  Github: <code>https://github.com/sypulabartosz/Pretius-Freeze-Report</code>',
@@ -128,9 +128,7 @@ unistr('  Author: <code>Bartosz Sypu\0142a</code><br/>'),
 '  Twitter: <code>@sypulabartosz</code><br/>',
 '</p>',
 '<strong>About Pretius</strong>',
-'<p>',
-'  Website: http://pretius.com',
-'</p>'))
+'<p>Website: https://pretius.com</p>'))
 ,p_version_identifier=>'1.0'
 ,p_files_version=>143
 );
